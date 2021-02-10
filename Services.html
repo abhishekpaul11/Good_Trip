@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Services</title>
+        <link rel='stylesheet' type='text/css' href='Services.css'>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="Mood.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <img src='./pics/car.png' class="car"></img>
+            <img src='./pics/gt.png' class="logo"></img>
+          </div>
+        <div class='navbar'>
+            <button class='navbutton'><text class='navtext'>MUSIC</text></button>
+            <button class='navbutton'><text class='navtext'>SERVICES</text></button>
+            <button class='navbutton'><text class='navtext'>BUDDIES</text></button>
+            <button class='navbutton'><text class='navtext'>SOUVENIRS</text></button>
+            <button class='navbutton'><text class='navtext'>HISTORY</text></button>
+        </div>
+        <div class='map' id='map'>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqw8bOGGz9Ojfei_gOoYtxO5FKFo0gr0&callback=initMap"></script>    
+        </div>
+        <div class='services' id='services'>
+            <div class='cards'>
+                <button class="mood1" onclick="activate()"><img src='./pics/hotels.png'></button>  
+                <a class='moodtext'> HOTELS</a>
+            </div>
+            <div class='cards'>
+                <button class="mood1" ><img src='./pics/fuel.png'></button>  
+                <a class='moodtext'> FUEL</a>
+            </div>
+            <br><br><br>
+            <div class='cards'>
+                <button class="mood1" ><img src='./pics/policestation.png'></button>  
+                <a class='moodtext'> POLICE</a>
+            </div>
+            <div class='cards'>
+                <button class="mood1" ><img src='./pics/carservice.png'></button>  
+                <a class='moodtext'> CAR REPAIR</a>
+            </div>
+            <br><br><br>
+            <div class='cards'>
+                <button class="mood1" ><img src='./pics/hospitals.png'></button>  
+                <a class='moodtext'> HOSPITALS</a>
+            </div>
+            <div class='cards'>
+                <button class="mood1" ><img src='./pics/pill.png'></button>  
+                <a class='moodtext'>PHARMACY</a>
+            </div>
+
+    </div>
+    </body>
+</html>

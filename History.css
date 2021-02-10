@@ -1,0 +1,100 @@
+.header {
+  position: absolute;
+  width: 96%;
+  height: 10%;
+  left: 2%;
+  top: 2%;
+
+  background: #58c9a0;
+  border-radius: 20px;
+}
+.car {
+  position: absolute;
+  width: 7%;
+  height: 100%;
+  left: 3%;
+  top: 3%;
+}
+.logo {
+  position: absolute;
+  width: 6%;
+  height: 90%;
+  left: 10%;
+  top: 3%;
+}
+.navbar {
+  position: absolute;
+  width: 96%;
+  height: 10%;
+  left: 2%;
+  top: 14%;
+
+  background: #58c9a0;
+  border-radius: 20px;
+}
+.navbutton {
+  position: relative;
+  width: 17%;
+  height: 80%;
+  left: 3%;
+  top: 10%;
+  margin-right: 2%;
+  background: #1d4e65;
+  border-radius: 10px;
+}
+.navtext {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+
+  text-align: center;
+
+  color: #ffffff;
+
+  border: 1px 1px #000000;
+}
+.map {
+  position: absolute;
+  width: 74%;
+  height: 72%;
+  left: 2%;
+  top: 26%;
+
+  border-radius: 20px;
+  display: inline-block;
+}
+.buddies {
+  position: absolute;
+  width: 22%;
+  height: 72%;
+  left: 78%;
+  top: 28%;
+}
+.cards {
+  width: 90%;
+  height: 15%;
+  margin-bottom: 20%;
+  background: #ffffff;
+  border: 4px solid #58c9a0;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+.bud_img {
+  display: inline-block;
+  width: 4%;
+  height: 4%;
+}
+.bud_text {
+  margin-left: 30%;
+  display: inline-block;
+  font-family: "Roboto", sans-serif;
+  width: 70%;
+  height: 70%;
+  font-size: 20px;
+}

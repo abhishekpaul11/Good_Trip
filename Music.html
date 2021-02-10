@@ -1,13 +1,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Moods</title>
-        <link rel='stylesheet' type='text/css' href='Mood.css'>
+        <title>Music</title>
+        <link rel='stylesheet' type='text/css' href='Music.css'>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="Mood.js"></script>
+        <script src="Music.js"></script>
     </head>
     <body>
         <div class="header">
@@ -24,34 +24,19 @@
         <div class='map' id='map'>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqw8bOGGz9Ojfei_gOoYtxO5FKFo0gr0&callback=initMap"></script>    
         </div>
-        <div class='moods' id='moods'>
-            <div class='cards'>
-                <button class="mood1" onclick="activate()"><img src='./pics/party.png'></button>  
-                <a class='moodtext'> PARTY</a>
-            </div>
-            <div class='cards'>
-                <button class="mood1" ><img src='./pics/love.png'></button>  
-                <a class='moodtext'> LOVE</a>
-            </div>
-            <br><br><br>
-            <div class='cards'>
-                <button class="mood1" ><img src='./pics/sad.png'></button>  
-                <a class='moodtext'> SAD</a>
-            </div>
-            <div class='cards'>
-                <button class="mood1" ><img src='./pics/happy.png'></button>  
-                <a class='moodtext'> HAPPY</a>
-            </div>
-            <br><br><br>
-            <div class='cards'>
-                <button class="mood1" ><img src='./pics/weather.png'></button>  
-                <a class='moodtext'> WEATHER</a>
-            </div>
-            <div class='cards'>
-                <button class="mood1" ><img src='./pics/region.png'></button>  
-                <a class='moodtext'> REGION</a>
-            </div>
 
+        <div class='music' id='music'>
+            <div class='songname'>Song Name </div>
+            <div class="songname">Artist</div>
+
+    <div class='buttons'>
+    <button class='design' >  <img src="./pics/pause.png" class='button'></button>
+    <button class="design">  <img src="./pics/play.png" class='button'> </button>
+    <button class='design'>  <img src="./pics/stop.png" class='button'></button>
+    </div>
+
+    <button  class='next' ><img src='./pics/next.png' ></button>
+    <button class='container'> <a>MOODS</a></button>
     </div>
     </body>
 </html>

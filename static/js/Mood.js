@@ -5,7 +5,12 @@ function initMap() {
   };
   var map = new google.maps.Map(document.getElementById("map"), mapProp);
 }
+var mood1 = "";
+function getMood() {
+  return mood1;
+}
 function play_song(mood) {
+  mood1 = mood;
   $.ajax({
     url: "/song",
     type: "POST",
@@ -14,6 +19,15 @@ function play_song(mood) {
     },
     success: function (ans) {
       console.log(ans);
+      var anss = ans.split("^");
+      console.log(anss[1]);
+      if (anss[2] == "True") anss[2] = "(Explicit)";
+      else anss[2] = "";
+      document.getElementById("song_name").innerHTML = anss[0] + anss[2];
+      document.getElementById("song_artist").innerHTML = anss[3];
+      document.getElementById("music_url").setAttribute("src", anss[1]);
+      document.getElementById("music_url").load();
+      document.getElementById("music_url").play();
     },
   });
 }
@@ -22,7 +36,6 @@ function music(mood) {
     document.getElementById("music").style.display == "" ||
     document.getElementById("music").style.display == "none"
   ) {
-    play_song(mood);
     document.getElementById("music").style.display = "inline-block";
     document.getElementById("moods").style.display = "none";
     document.getElementById("services").style.display = "none";
@@ -31,6 +44,7 @@ function music(mood) {
     document.getElementById("servicesin").style.display = "none";
     document.getElementById("plus").style.display = "none";
     document.getElementById("souvenirs").style.display = "none";
+    if (mood != "NA") play_song(mood);
   } else {
     document.getElementById("music").style.display = "none";
     document.getElementById("moods").style.display = "inline-block";

@@ -16,7 +16,7 @@
             <img src="{{ url_for('static', filename='pics/gt.png') }}" class="logo"></img>
           </div>
         <div class='navbar'>
-            <button class='navbutton' onclick="music('happy')"><text class='navtext'>MUSIC</text></button>
+            <button class='navbutton' onclick="music('NA')"><text class='navtext'>MUSIC</text></button>
             <button class='navbutton' onclick="services()"><text class='navtext'>SERVICES</text></button>
             <button class='navbutton' onclick="buddies()"><text class='navtext'>BUDDIES</text></button>
             <button class='navbutton' onclick="souvenirs()"><text class='navtext'>SOUVENIRS</text></button>
@@ -57,22 +57,20 @@
                 <!-- MUSIC DIV -->
                 <div class='music' id='music'>
 
-                    <div class='songname'>Song Name </div>
-                    <div class="songname">Artist</div>
+                    <div class='songname' id='song_name'>Song Name </div>
+                    <div class="songname" id='song_artist'>Artist</div>
     
             <div class='buttons'>
                 <!-- <button class='design' >  <img src="./pics/pause.png" class='button'></button> -->
                 <!-- <button class="design">  <img src="./pics/play.png" class='button'> </button> -->
                 <!-- <button class='design'>  <img src="./pics/stop.png" class='button'></button> -->
-                <audio controls id="music">
-
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                <audio controls  type="audio/mpeg" id="music_url">
                     Your browser does not support the audio element.
                     </audio>
 
             </div>
     
-            <button  class='next' ><img src="{{ url_for('static', filename='pics/next.png') }}"></button>
+            <button  class='next' onClick='play_song(getMood())'><img src="{{ url_for('static', filename='pics/next.png') }}"></button>
             <button class='container' onClick='music()'> <a>MOODS</a></button>
             </div>
             <!-- MUSIC DIV -->

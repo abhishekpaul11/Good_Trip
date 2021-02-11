@@ -15,18 +15,18 @@
             <img src='./pics/gt.png' class="logo"></img>
           </div>
         <div class='navbar'>
-            <button class='navbutton'><text class='navtext'>MUSIC</text></button>
-            <button class='navbutton'><text class='navtext'>SERVICES</text></button>
-            <button class='navbutton'><text class='navtext'>BUDDIES</text></button>
-            <button class='navbutton'><text class='navtext'>SOUVENIRS</text></button>
-            <button class='navbutton'><text class='navtext'>HISTORY</text></button>
+            <button class='navbutton' onclick="music()"><text class='navtext'>MUSIC</text></button>
+            <button class='navbutton' onclick="services()"><text class='navtext'>SERVICES</text></button>
+            <button class='navbutton' onclick="buddies()"><text class='navtext'>BUDDIES</text></button>
+            <button class='navbutton' onclick="souvenirs()"><text class='navtext'>SOUVENIRS</text></button>
+            <button class='navbutton' onclick="hist()"><text class='navtext'>HISTORY</text></button>
         </div>
         <div class='map' id='map'>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqw8bOGGz9Ojfei_gOoYtxO5FKFo0gr0&callback=initMap"></script>    
         </div>
         <div class='moods' id='moods'>
             <div class='cards'>
-                <button class="mood1" onclick="activate()"><img src='./pics/party.png'></button>  
+                <button class="mood1" onclick="music()"><img src='./pics/party.png'></button>  
                 <a class='moodtext'> PARTY</a>
             </div>
             <div class='cards'>
@@ -53,5 +53,173 @@
             </div>
 
     </div>
+                <!-- MUSIC DIV -->
+                <div class='music' id='music'>
+
+                    <div class='songname'>Song Name </div>
+                    <div class="songname">Artist</div>
+    
+            <div class='buttons'>
+                <!-- <button class='design' >  <img src="./pics/pause.png" class='button'></button> -->
+                <!-- <button class="design">  <img src="./pics/play.png" class='button'> </button> -->
+                <!-- <button class='design'>  <img src="./pics/stop.png" class='button'></button> -->
+                <audio controls id="music">
+
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                    </audio>
+
+            </div>
+    
+            <button  class='next' ><img src='./pics/next.png' ></button>
+            <button class='container' onClick='music()'> <a>MOODS</a></button>
+            </div>
+            <!-- MUSIC DIV -->
+
+
+            <!-- SERVICES DIV -->
+            <div class='services' id='services'>
+                <div class='cards'>
+                    <button class="mood1" onclick="servicesin()"><img src='./pics/hotels.png'></button>  
+                    <a class='servicestext'> HOTELS</a>
+                </div>
+                <div class='cards'>
+                    <button class="mood1" ><img src='./pics/fuel.png'></button>  
+                    <a class='servicestext'> FUEL</a>
+                </div>
+                <br><br><br>
+                <div class='cards'>
+                    <button class="mood1" ><img src='./pics/policestation.png'></button>  
+                    <a class='servicestext'> POLICE</a>
+                </div>
+                <div class='cards'>
+                    <button class="mood1" ><img src='./pics/carservice.png'></button>  
+                    <a class='servicestext'> CAR REPAIR</a>
+                </div>
+                <br><br><br>
+                <div class='cards'>
+                    <button class="mood1" ><img src='./pics/hospitals.png'></button>  
+                    <a class='servicestext'> HOSPITALS</a>
+                </div>
+                <div class='cards'>
+                    <button class="mood1" ><img src='./pics/pill.png'></button>  
+                    <a class='servicestext'>PHARMACY</a>
+                </div>
+    
+        </div>
+        <!-- SERVICES DIV -->
+
+
+        <!-- BUDDIES DIV -->
+        <div class='buddies' id='buddies'>
+            <div class='bud_cards'>
+                <div class='bud_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='bud_text'>
+                    <a>WB0XXXXX</a>
+                    <a>+91XXXXXXXXXX</a>
+                    <br><br>
+                </div>
+            </div>
+            <div class='bud_cards'>
+                <div class='bud_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='bud_text'>
+                    <a>WB0XXXXX</a>
+                    <a>+91XXXXXXXXXX</a>
+                    <br><br>
+                </div>
+            </div>
+            <div class='bud_cards'>
+                <div class='bud_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='bud_text'>
+                    <a>WB0XXXXX</a>
+                    <a>+91XXXXXXXXXX</a>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BUDDIES DIV -->
+
+        <!-- SOUVENIRS -->
+        <div class='souvenirs' id='souvenirs'>
+            <div class='souv_cards'>
+                <div class='souv_text'>
+                    <a> </a>
+                </div>
+            </div>
+
+          
+        </div>
+        <button class='plus' onClick='add()' id='plus'><img src='./pics/plus.png' class='plus1'></button>
+        <!-- SOUVENIRS -->
+
+
+        <!-- HISTORY -->
+        <div class='history' id='history'>
+            <div class='hist_cards'>
+                <div class='hist_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='hist_text'>
+                        <text>Munnar</text>
+                        <br>
+                        <text>1200km</text>
+                        <br>
+                        <text>February 2021</text>
+                   
+                </div>
+            </div>
+            <div class='hist_cards'>
+                <div class='hist_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='hist_text'>
+                    <text>Srinagar</text>
+                    <br>
+                    <text>2400km</text>
+                    <br>
+                    <text>March 2020</text>
+                    
+                </div>
+            </div>
+            <div class='hist_cards'>
+                <div class='hist_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='hist_text'>
+                    <text>Darjeeling</text>
+                    <br>
+                    <text>990km</text>
+                    <br>
+                    <text>February 2019</text>
+                 
+                </div>
+            </div>
+        </div>
+        <!-- HISTORY -->
+
+
+        <!-- SERVICES IN -->
+        <div class='servicesin' id='servicesin'>
+            <div class='servicesin_cards'>
+                <div class='servicesin_img'>
+                <img src='./pics/bud.png'>
+                </div>
+                <div class='servicesin_text'>
+                        <text style="font-weight: bold; font-size: 20px">Friends Chinese</text>
+                        <br>
+                        <text>Tal, maval, Dist-, Mumbai - Pune Hwy, Kamshet 410405</text>
+                        <br>
+                        <text></text>
+                </div>
+            </div>
+        </div>
+        <!-- SERVICES IN -->
     </body>
 </html>

@@ -2,17 +2,17 @@
     <head>
         <meta charset="utf-8">
         <title>Moods</title>
-        <link rel='stylesheet' type='text/css' href='Mood.css'>
+        <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/Mood.css') }}">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="Mood.js"></script>
+        <script src="{{ url_for('static', filename='js/Mood.js') }}"></script>
     </head>
     <body>
         <div class="header">
-            <img src='./pics/car.png' class="car"></img>
-            <img src='./pics/gt.png' class="logo"></img>
+            <img src="{{ url_for('static', filename='pics/car.png') }}" class="car"></img>
+            <img src="{{ url_for('static', filename='pics/gt.png') }}" class="logo"></img>
           </div>
         <div class='navbar'>
             <button class='navbutton' onclick="music()"><text class='navtext'>MUSIC</text></button>
@@ -26,29 +26,29 @@
         </div>
         <div class='moods' id='moods'>
             <div class='cards'>
-                <button class="mood1" onclick="music()"><img src='./pics/party.png'></button>  
+                <button class="mood1" onclick="music()"><img src="{{ url_for('static', filename='pics/party.png') }}"></button>  
                 <a class='moodtext'> PARTY</a>
             </div>
             <div class='cards'>
-                <button class="mood1" ><img src='./pics/love.png'></button>  
+                <button class="mood1" ><img src="{{ url_for('static', filename='pics/love.png') }}"></button>  
                 <a class='moodtext'> LOVE</a>
             </div>
             <br><br><br>
             <div class='cards'>
-                <button class="mood1" ><img src='./pics/sad.png'></button>  
+                <button class="mood1" ><img src="{{ url_for('static', filename='pics/sad.png') }}"></button>  
                 <a class='moodtext'> SAD</a>
             </div>
             <div class='cards'>
-                <button class="mood1" ><img src='./pics/happy.png'></button>  
+                <button class="mood1" ><img src="{{ url_for('static', filename='pics/happy.png') }}"></button>  
                 <a class='moodtext'> HAPPY</a>
             </div>
             <br><br><br>
             <div class='cards'>
-                <button class="mood1" ><img src='./pics/weather.png'></button>  
+                <button class="mood1" ><img src="{{ url_for('static', filename='pics/weather.png') }}"></button>  
                 <a class='moodtext'> WEATHER</a>
             </div>
             <div class='cards'>
-                <button class="mood1" ><img src='./pics/region.png'></button>  
+                <button class="mood1" ><img src="{{ url_for('static', filename='pics/region.png') }}"></button>  
                 <a class='moodtext'> REGION</a>
             </div>
 
@@ -71,7 +71,7 @@
 
             </div>
     
-            <button  class='next' ><img src='./pics/next.png' ></button>
+            <button  class='next' ><img src="{{ url_for('static', filename='pics/next.png') }}"></button>
             <button class='container' onClick='music()'> <a>MOODS</a></button>
             </div>
             <!-- MUSIC DIV -->
@@ -80,29 +80,29 @@
             <!-- SERVICES DIV -->
             <div class='services' id='services'>
                 <div class='cards'>
-                    <button class="mood1" onclick="servicesin()"><img src='./pics/hotels.png'></button>  
+                    <button class="mood1" onclick="servicesin()"><img src="{{ url_for('static', filename='pics/hotels.png') }}"></button>  
                     <a class='servicestext'> HOTELS</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src='./pics/fuel.png'></button>  
+                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/fuel.png') }}"></button>  
                     <a class='servicestext'> FUEL</a>
                 </div>
                 <br><br><br>
                 <div class='cards'>
-                    <button class="mood1" ><img src='./pics/policestation.png'></button>  
+                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/policestation.png') }}"></button>  
                     <a class='servicestext'> POLICE</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src='./pics/carservice.png'></button>  
+                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/carservice.png') }}"></button>  
                     <a class='servicestext'> CAR REPAIR</a>
                 </div>
                 <br><br><br>
                 <div class='cards'>
-                    <button class="mood1" ><img src='./pics/hospitals.png'></button>  
+                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/hospitals.png') }}"></button>  
                     <a class='servicestext'> HOSPITALS</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src='./pics/pill.png'></button>  
+                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/pill.png') }}"></button>  
                     <a class='servicestext'>PHARMACY</a>
                 </div>
     
@@ -114,7 +114,7 @@
         <div class='buddies' id='buddies'>
             <div class='bud_cards'>
                 <div class='bud_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='bud_text'>
                     <a>WB0XXXXX</a>
@@ -124,7 +124,7 @@
             </div>
             <div class='bud_cards'>
                 <div class='bud_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='bud_text'>
                     <a>WB0XXXXX</a>
@@ -134,7 +134,7 @@
             </div>
             <div class='bud_cards'>
                 <div class='bud_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='bud_text'>
                     <a>WB0XXXXX</a>
@@ -156,7 +156,7 @@
 
           
         </div>
-        <button class='plus' onClick='add()' id='plus'><img src='./pics/plus.png' class='plus1'></button>
+        <button class='plus' onClick='add()' id='plus'><img src="{{ url_for('static', filename='pics/plus.png') }}" class='plus1'></button>
         <!-- SOUVENIRS -->
 
 
@@ -164,7 +164,7 @@
         <div class='history' id='history'>
             <div class='hist_cards'>
                 <div class='hist_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='hist_text'>
                         <text>Munnar</text>
@@ -177,7 +177,7 @@
             </div>
             <div class='hist_cards'>
                 <div class='hist_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='hist_text'>
                     <text>Srinagar</text>
@@ -190,7 +190,7 @@
             </div>
             <div class='hist_cards'>
                 <div class='hist_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='hist_text'>
                     <text>Darjeeling</text>
@@ -209,7 +209,7 @@
         <div class='servicesin' id='servicesin'>
             <div class='servicesin_cards'>
                 <div class='servicesin_img'>
-                <img src='./pics/bud.png'>
+                <img src="{{ url_for('static', filename='pics/bud.png') }}">
                 </div>
                 <div class='servicesin_text'>
                         <text style="font-weight: bold; font-size: 20px">Friends Chinese</text>

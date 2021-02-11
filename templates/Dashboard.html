@@ -2,14 +2,15 @@
     <head>
         <meta charset="utf-8">
         <title>Dashboard</title>
-        <link rel='stylesheet' type='text/css' href='Dashboard.css'>
+        <link rel='stylesheet'  href="{{ url_for('static', filename='Dashboard.css') }}">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <script src="{{ url_for('static', filename='js/Dashboard.js') }}"></script>
     </head>
     <body>
         <div class="header">
-            <img src='./pics/car.png' class="car"></img>
-            <img src='./pics/gt.png' class="logo"></img>
+            <img src="{{ url_for('static', filename='pics/car.png') }}" class="car"></img>
+            <img src="{{ url_for('static', filename='pics/gt.png') }}" class="logo"></img>
           </div>
           <div class="dashboard">
             <div class="tagline">
@@ -17,18 +18,18 @@
             </div>
           </div>
           <div class='container'>
-              <div class="h4">
+              <form class="h4" method='POST' >
               <div class='destination'>Destination</div>
               <div class='input'>
-                  <textarea class="input1"></textarea>
+                  <textarea class="input1" name='dest' type='submit' id='dest'></textarea>
               </div>
               <button class='container1'>
-                    <div class='startjourney'>Start Journey</div>
+                    <div class='startjourney' onclick='data()'>Start Journey</div>
               </button>
               <button class='container2'>
                  <div class="skip"> Skip</div>
               </button>
-        </div>
+            </form>
           </div>
     </body>
 </html>

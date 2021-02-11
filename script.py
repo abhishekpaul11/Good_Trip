@@ -30,8 +30,7 @@ genres = []
 cat_id = ''
 lat = '30.9010'#current latitude
 lng = '75.8573'#current longitide
-app = Flask(__name__)
-
+app = Flask(__name__, static_folder="./static")
 
 # In[ ]:
 
@@ -49,7 +48,7 @@ def dest_weather(city):
         z = x["weather"] 
         weather_description = z[0]["description"] 
         icon = z[0]["icon"] 
-        return [current_temperature+'%'+weather_description+'%'+icon]
+        return (str(int(current_temperature))+'%'+weather_description+'%'+icon)
 
 
 # In[ ]:
@@ -57,16 +56,19 @@ def dest_weather(city):
 
 @app.route('/',methods=['POST','GET'])
 def home():
+    print(request.form.get('dest'))
     if(request.form.get('dest')!=None and request.form.get('dest')!='NA'):
         res = dest_weather(request.form.get('dest'))
+        print(res)
         res = res.split('%')
-        return render_template('dashboard.html',temp = res[0], desc = res[1],icon = res[2])
+        
+        return render_template('Moods.html',temp = res[0], desc = res[1],icon = res[2])
     elif(request.form.get('dest')=='NA'):
-        return render_template('dashboard.html',temp = '', desc = '',icon = '')
+        return render_template('Moods.html',temp = '', desc = '',icon = '')
     else:
         return render_template('Dashboard.html')
 
-app.run('0.0.0.0', 10001)
+app.run('0.0.0.0', 10001,debug=True)
 
 
 # In[ ]:

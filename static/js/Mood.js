@@ -5,19 +5,32 @@ function initMap() {
   };
   var map = new google.maps.Map(document.getElementById("map"), mapProp);
 }
-function music() {
+function play_song(mood) {
+  $.ajax({
+    url: "/song",
+    type: "POST",
+    data: {
+      mood: mood,
+    },
+    success: function (ans) {
+      console.log(ans);
+    },
+  });
+}
+function music(mood) {
   if (
     document.getElementById("music").style.display == "" ||
     document.getElementById("music").style.display == "none"
   ) {
-    document.getElementById("plus").style.display = "none";
-    document.getElementById("souvenirs").style.display = "none";
+    play_song(mood);
     document.getElementById("music").style.display = "inline-block";
     document.getElementById("moods").style.display = "none";
     document.getElementById("services").style.display = "none";
     document.getElementById("buddies").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
+    document.getElementById("plus").style.display = "none";
+    document.getElementById("souvenirs").style.display = "none";
   } else {
     document.getElementById("music").style.display = "none";
     document.getElementById("moods").style.display = "inline-block";
@@ -40,7 +53,6 @@ function services() {
 }
 
 function buddies() {
-  console.log("fkjf");
   if (
     document.getElementById("buddies").style.display == "" ||
     document.getElementById("buddies").style.display == "none"

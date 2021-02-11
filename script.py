@@ -68,7 +68,7 @@ def home():
     else:
         return render_template('Dashboard.html')
 
-app.run('0.0.0.0', 10001,debug=True)
+app.run('0.0.0.0', 5001)
 
 
 # In[ ]:
@@ -147,6 +147,7 @@ def song():
             cat_id = 'marathi' 
         s1+=1
         res = play_plist(cat_id,sl)
+    print(res)
     return res
 
 

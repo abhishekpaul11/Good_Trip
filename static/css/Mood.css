@@ -7,7 +7,7 @@
   height: 10%;
   left: 2%;
   top: 2%;
-
+  display: inline-block;
   background: linear-gradient(
     90.34deg,
     rgba(170, 66, 28, 0.88) -0.88%,
@@ -355,24 +355,31 @@
   font-size: 15px;
 }
 .weather {
-  text-align: right;
+  margin-left: 75%;
+  display: inline-block;
+  width: 25%;
+
+  height: 100%;
 }
 .weather_text {
-  position: relative;
+  position: absolute;
+  height: 100%;
+  width: auto;
   font-size: 15px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 15px;
-  background-color: blue;
-  margin-right: 5%;
-  display: inline-block;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  margin-left: 1%;
+  background-color: turquoise;
 }
 .weather_img {
-  position: relative;
+  position: absolute;
   height: 100%;
-  margin-bottom: 2%;
-  margin-right: 2%;
-  margin-left: 2%;
+  width: auto;
+  margin-left: 90%;
   display: inline-block;
+  background-color: white;
 }

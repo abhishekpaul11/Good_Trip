@@ -1,3 +1,6 @@
+* {
+  outline: none;
+}
 .header {
   position: absolute;
   width: 96%;

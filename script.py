@@ -51,7 +51,7 @@ def dest_weather(city):
         z = x["weather"]
         weather_description = z[0]["description"]
         icon = z[0]["icon"]
-        return (str(int(current_temperature))+'%'+weather_description+'%'+icon)
+        return (str(int(current_temperature-273))+'%'+weather_description+'%'+icon)
 
 
 # In[ ]:
@@ -68,10 +68,10 @@ def home():
         print(res)
         city = request.form.get('dest')
         res = res.split('%')
-        return render_template('Moods.html', temp=res[0], desc=res[1], icon=res[2])
+        return render_template('Moods.html', ct=city, temp=res[0]+'°C', desc=res[1], icon='http://openweathermap.org/img/wn/'+res[2]+'@2x.png')
 
     elif(request.form.get('dest') == 'NA'):
-        return render_template('Moods.html', temp='', desc='', icon='')
+        return render_template('Moods.html', ct="", temp='', desc='', icon='http://mykimini.com/wp-content/uploads/blank-link.png')
     else:
         return render_template('Dashboard.html')
 

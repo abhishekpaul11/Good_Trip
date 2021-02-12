@@ -15,8 +15,12 @@
         <div class="header">
             <img src="{{ url_for('static', filename='pics/car.svg') }}" class="car"></img>
             <div class='weather'>
-            <text class='weather_text'>ffnfn fknfk lnf knfknkl</text>
-            <img src="{{ url_for('static', filename='pics/car.svg') }}" class="weather_img"/></div>
+                
+            <text class='weather_text'>{{ct}} <br>{{temp}} <br>{{desc}}</a>
+        
+            <img src="{{icon}}" class="weather_img"/>
+         </div>
+      
           </div>
         <div class='navbar'>
             <button class='navbutton' onclick="music('NA')"><text class='navtext'>MUSIC</text></button>

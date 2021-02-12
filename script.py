@@ -258,4 +258,4 @@ def get_region(lat, lng):
 #     print(link.text)
 #   for link in BeautifulSoup(response, 'html.parser',parseOnlyThese=SoupStrainer('b')):
 #     print(link.text)
-app.run('0.0.0.0', 5005)
+app.run('0.0.0.0', 5005, debug=True)

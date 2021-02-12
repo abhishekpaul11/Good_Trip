@@ -5,30 +5,40 @@
         <link rel='stylesheet'  href="{{ url_for('static', filename='css/Dashboard.css') }}">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
         <script src="{{ url_for('static', filename='js/Dashboard.js') }}"></script>
     </head>
     <body>
         <div class="header">
-            <img src="{{ url_for('static', filename='pics/car.png') }}" class="car"></img>
-            <img src="{{ url_for('static', filename='pics/gt.png') }}" class="logo"></img>
+            <img src="{{ url_for('static', filename='pics/car.svg') }}" class="car"></img>
+          
           </div>
           <div class="dashboard">
+            <div class='dashboard_img'></div>
             <div class="tagline">
+              Good Trip
+            </div>
+            <div class='tagline1'>
               Rides and Trips are best when we are with you
             </div>
           </div>
           <div class='container'>
               <form class="h4" method='POST' >
               <div class='destination'>Destination</div>
-              <div class='input'>
-                  <textarea class="input1" name='dest' type='submit' id='dest'></textarea>
-              </div>
-              <button class='container1'>
+              <div class='line'></div>
+              <input class='input placeholder' placeholder="Enter the destination"  name='dest' id='dest'>
+
+              </input>
+              <div class='container1' >
+              <button class='container2' >
                     <div class='startjourney' onclick='data()'>Start Journey</div>
               </button>
+              </div>
+              <div class='container1'>
               <button class='container2'>
                  <div class="skip"> Skip</div>
               </button>
+            </div>
             </form>
           </div>
     </body>

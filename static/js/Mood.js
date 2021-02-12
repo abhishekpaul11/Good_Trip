@@ -146,7 +146,7 @@ function add() {
 var city = "";
 var souvenirs_list = [];
 var souvenirs_list1 = [];
-
+var flag = true;
 $.ajax({
   url: "/get_location",
   type: "POST",
@@ -185,12 +185,13 @@ function firebase_() {
         </div>
       </div>`;
       }
-    } else {
+    } else if (flag) {
       var data_souvenir = database.child(city);
       data_souvenir.on("value", (snap1) => {
         dictionary = snap1.val();
         souvenirs_list = Object.keys(dictionary);
         console.log(souvenirs_list);
+        flag = false;
         scrape();
       });
     }

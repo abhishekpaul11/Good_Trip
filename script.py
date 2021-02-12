@@ -8,7 +8,10 @@ from flask import Flask, render_template, request
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import requests
-
+from bs4 import BeautifulSoup, SoupStrainer
+import httplib2
+from googlesearch import search
+import os
 
 # In[ ]:
 
@@ -26,6 +29,7 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 flag = ''
 s1 = 0
 genres = []
+city = ""
 cat_id = ''
 lat = '30.9010'  # current latitude
 lng = '75.8573'  # current longitide
@@ -55,13 +59,17 @@ def dest_weather(city):
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
+    global city
     print(request.form.get('dest'))
-    if(request.form.get('dest') != None and request.form.get('dest') != 'NA'):
+    if(request.form.get('dest') == "OOPS"):
+        return render_template('Dashboard.html')
+    elif(request.form.get('dest') != None and request.form.get('dest') != 'NA'):
         res = dest_weather(request.form.get('dest'))
         print(res)
+        city = request.form.get('dest')
         res = res.split('%')
-
         return render_template('Moods.html', temp=res[0], desc=res[1], icon=res[2])
+
     elif(request.form.get('dest') == 'NA'):
         return render_template('Moods.html', temp='', desc='', icon='')
     else:
@@ -69,6 +77,11 @@ def home():
 
 
 # In[ ]:
+@app.route('/get_location', methods=['POST', "GET"])
+def get_location():
+    global city
+    print(city)
+    return city
 
 
 def play_track(gen):
@@ -79,11 +92,12 @@ def play_track(gen):
     explicit = (a['tracks'][0]['explicit'])
     song_type = (a['tracks'][0]['type'])
     name = (a['tracks'][0]['album']['artists'][0]['name'])
+    img = (a['tracks'][0]['album']['images'][0]['url'])
     print(url, type(url))
     if((url == None) or song_type != 'track'):
         return(play_track(gen))
     print(song, name, url, explicit)
-    return (song+'^'+url+'^'+str(explicit)+'^'+name)
+    return (song+'^'+url+'^'+str(explicit)+'^'+name+'^'+img)
 
 
 # In[ ]:
@@ -99,8 +113,9 @@ def play_plist(cat_id, s11):
     url = (q['tracks']['items'][0]['track']['preview_url'])
     name = (q['tracks']['items'][0]['track']['artists'][0]['name'])
     song = (q['tracks']['items'][0]['track']['name'])
+    image = (q['tracks']['items'][0]['track']['album']['images'][0]['url'])
     if(url != None):
-        return (song+'^'+url+'^'+'^'+name)
+        return (song+'^'+url+'^'+'^'+name+'^'+image)
     else:
         global s1
         s1 += 1
@@ -225,37 +240,41 @@ def get_region(lat, lng):
     return (x["results"][0]['components']['state'])
 
 
-# In[ ]:
+@app.route("/souvenir", methods=['GET', 'POST'])
+def souvenir():
+
+    url = []
+    try:
+        from googlesearch import search
+    except ImportError:
+        print("No module named 'google' found")
+    # to search
+    query = "whatshot "+city + " best things to buy"
+
+    for j in search(query, tld="co.in", num=10, stop=2, pause=2):
+        url.append(j)
+
+    http = httplib2.Http()
+    a = url[0]
+    status, response = http.request(a)
+    sop = BeautifulSoup(response, 'lxml')
+    details = []
+    details1 = []
+    details3 = []
+    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('h2')):
+        details.append(link.text)
+    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('h3')):
+        details1.append(link.text)
+
+    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('b')):
+        details3.append(link.text)
+
+    if(len(details) > 4 and 'Similar Stories' not in details[0]):
+        return({'a': details[0:5]})
+    elif(len(details1) > 4 and 'Similar Stories' not in details1[0]):
+        return({'a': details1[0:5]})
+    elif(len(details3) > 4):
+        return({'a': details3[0:5]})
 
 
-# import requests
-# from bs4 import BeautifulSoup,SoupStrainer
-# import httplib2
-# from googlesearch import search
-# import os
-# from selenium import webdriver
-# def souvenir(city):
-#   url=[]
-#   try:
-#       from googlesearch import search
-#   except ImportError:
-#       print("No module named 'google' found")
-#   # to search
-#   query = "whatshot "+city+ " souvenirs"
-#   print(query)
-#   for j in search(query, tld="co.in", num=10, stop=2, pause=2):
-#       url.append(j)
-#   print(url)
-#   http = httplib2.Http()
-#   a=url[0]
-#   status, response = http.request(a)
-#   sop=BeautifulSoup(response,'lxml' )
-#   details=[]
-#   for link in BeautifulSoup(response, 'html.parser',parseOnlyThese=SoupStrainer('h3')):
-#     details.append(link.text)
-#   print(details)
-#   for link in BeautifulSoup(response, 'html.parser',parseOnlyThese=SoupStrainer('h3')):
-#     print(link.text)
-#   for link in BeautifulSoup(response, 'html.parser',parseOnlyThese=SoupStrainer('b')):
-#     print(link.text)
 app.run('0.0.0.0', 5005, debug=True)

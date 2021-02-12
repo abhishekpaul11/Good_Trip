@@ -26,17 +26,17 @@
               <form class="h4" method='POST' >
               <div class='destination'>Destination</div>
               <div class='line'></div>
-              <input class='input placeholder' placeholder="Enter the destination"  name='dest' id='dest'>
-
+              <input class='input placeholder' placeholder="Enter the destination"  name='dest' id='dest'></input>
+               
               </input>
               <div class='container1' >
               <button class='container2' >
-                    <div class='startjourney' onclick='data()'>Start Journey</div>
+                    <div class='startjourney' onclick='data(true)'>Start Journey</div>
               </button>
               </div>
               <div class='container1'>
-              <button class='container2'>
-                 <div class="skip"> Skip</div>
+              <button class='container2' onclick='data(false)'>
+                 <div class="skip" > Skip</div>
               </button>
             </div>
             </form>

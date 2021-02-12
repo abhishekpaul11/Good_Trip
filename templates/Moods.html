@@ -6,14 +6,17 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-       
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="{{ url_for('static', filename='js/Mood.js') }}"></script>
     </head>
     <body>
         <div class="header">
-            <img src="{{ url_for('static', filename='pics/car.png') }}" class="car"></img>
-            <img src="{{ url_for('static', filename='pics/gt.png') }}" class="logo"></img>
+            <img src="{{ url_for('static', filename='pics/car.svg') }}" class="car"></img>
+            <div class='weather'>
+            <text class='weather_text'>ffnfn fknfk lnf knfknkl</text>
+            <img src="{{ url_for('static', filename='pics/car.svg') }}" class="weather_img"/></div>
           </div>
         <div class='navbar'>
             <button class='navbutton' onclick="music('NA')"><text class='navtext'>MUSIC</text></button>
@@ -59,12 +62,12 @@
 
                     <div class='songname' id='song_name'>Song Name </div>
                     <div class="songname" id='song_artist'>Artist</div>
-    
+                    <img class='songimage' id="song_image">
             <div class='buttons'>
                 <!-- <button class='design' >  <img src="./pics/pause.png" class='button'></button> -->
                 <!-- <button class="design">  <img src="./pics/play.png" class='button'> </button> -->
                 <!-- <button class='design'>  <img src="./pics/stop.png" class='button'></button> -->
-                <audio controls  type="audio/mpeg" id="music_url">
+                <audio controls  type="audio/mpeg" id="music_url" style="width: 100%;">
                     Your browser does not support the audio element.
                     </audio>
 
@@ -147,15 +150,11 @@
 
         <!-- SOUVENIRS -->
         <div class='souvenirs' id='souvenirs'>
-            <div class='souv_cards'>
-                <div class='souv_text'>
-                    <a> </a>
-                </div>
-            </div>
+            
 
           
         </div>
-        <button class='plus' onClick='add()' id='plus'><img src="{{ url_for('static', filename='pics/plus.png') }}" class='plus1'></button>
+        <button class='plus' onClick='add()' id='plus'><img src="{{ url_for('static', filename='pics/plus.svg') }}" class='plus1'></button>
         <!-- SOUVENIRS -->
 
 

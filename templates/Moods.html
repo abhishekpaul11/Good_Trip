@@ -84,29 +84,29 @@
             <!-- SERVICES DIV -->
             <div class='services' id='services'>
                 <div class='cards'>
-                    <button class="mood1" onclick="servicesin()"><img src="{{ url_for('static', filename='pics/hotels.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('HOTELS')"><img src="{{ url_for('static', filename='pics/HOTELS.png') }}"></button>  
                     <a class='servicestext'> HOTELS</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/fuel.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('FUEL')"><img src="{{ url_for('static', filename='pics/FUEL.png') }}"></button>  
                     <a class='servicestext'> FUEL</a>
                 </div>
                 <br><br><br>
                 <div class='cards'>
-                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/policestation.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('POLICE STATION')"><img src="{{ url_for('static', filename='pics/POLICE STATION.png') }}"></button>  
                     <a class='servicestext'> POLICE</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/carservice.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('CAR REPAIR')"><img src="{{ url_for('static', filename='pics/CAR REPAIR.png') }}"></button>  
                     <a class='servicestext'> CAR REPAIR</a>
                 </div>
                 <br><br><br>
                 <div class='cards'>
-                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/hospitals.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('HOSPITALS')"><img src="{{ url_for('static', filename='pics/HOSPITALS.png') }}"></button>  
                     <a class='servicestext'> HOSPITALS</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" ><img src="{{ url_for('static', filename='pics/pill.png') }}"></button>  
+                    <button class="mood1" onclick="servicesin('PHARMACY')"><img src="{{ url_for('static', filename='pics/PHARMACY.png') }}"></button>  
                     <a class='servicestext'>PHARMACY</a>
                 </div>
     
@@ -142,18 +142,7 @@
 
         <!-- SERVICES IN -->
         <div class='servicesin' id='servicesin'>
-            <div class='servicesin_cards'>
-                <div class='servicesin_img'>
-                <img src="{{ url_for('static', filename='pics/bud.png') }}">
-                </div>
-                <div class='servicesin_text'>
-                        <text style="font-weight: bold; font-size: 20px">Friends Chinese</text>
-                        <br>
-                        <text>Tal, maval, Dist-, Mumbai - Pune Hwy, Kamshet 410405</text>
-                        <br>
-                        <text></text>
-                </div>
-            </div>
+           
         </div>
         <!-- SERVICES IN -->
     </body>

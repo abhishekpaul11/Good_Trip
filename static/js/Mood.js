@@ -24,8 +24,123 @@ function initMap() {
   });
 }
 var markers_buddies = [];
+var markers_servicesin = [];
 var map = "";
 var mood1 = "";
+var services_list = {
+  HOSPITALS: [
+    {
+      Name: "Jakhotia Nursing Home",
+      Address:
+        "General hospital · Mahaveer Garden, Nh 48, Shastrinagar, Sri Swami Samarth Nagar",
+      Phone: "02192 265 675",
+      Lat: 18.79748979731988,
+      Long: 73.34095521999281,
+    },
+
+    {
+      Name: "Trinity Healthcare",
+      Address: "MG Rd, Hudco Colony, Lonavla, Maharashtra 410401",
+      Phone: "02192 265 675",
+      Lat: 18.77756847326304,
+      Long: 73.40139565994387,
+    },
+  ],
+
+  "POLICE STATION": [
+    {
+      Name: "Rasayani Police Station",
+      Address: "Police department",
+      Phone: "02192 250 133",
+      Lat: 18.885690856203592,
+      Long: 73.17340851297688,
+    },
+
+    {
+      Name: "Khalapur Police Station",
+      Address: "Khalapur, Maharashtra 410202",
+      Phone: "02192 250 133",
+      Lat: 18.837936524600135,
+      Long: 73.28456456127245,
+    },
+  ],
+
+  HOTELS: [
+    {
+      Name: "Hotel Marathi",
+      Address: "Savroli - Kharpada Rd, Kharsundi, Maharashtra 410203",
+      Lat: "18.824689011233865",
+      Long: "73.25316409551579",
+      Phone: "9831323596",
+    },
+
+    {
+      Name: "Friends Chinese",
+      Address:
+        "Tal, maval, Dist-, Mumbai - Pune Hwy, Kamshet, Maharashtra 410405",
+      Lat: 18.829075893978203,
+      Long: 73.2627771318535,
+      Phone: "1234566677",
+    },
+  ],
+
+  "CAR REPAIR": [
+    {
+      Name: "Puncture Man Sanpada",
+      Address:
+        "Hotel Highway View, Mumbai Pune Road, Sanpada, Navi Mumbai, Sector 24, Turbhe, Mumbai, Maharashtra 400705",
+      Long: 18.828687937186427,
+      Lat: 73.26276569903425,
+      Phone: "12345678",
+    },
+
+    {
+      Name: "First Tunnel",
+      Address: "Mumbai - Pune Expy, Ambivali T. Tungartan, Maharashtra 410220",
+      Lat: 18.845422069092272,
+      Long: 73.23718815592143,
+      Phone: "123456789",
+    },
+  ],
+
+  PHARMACY: [
+    {
+      Name: "Bhangale Medical Stores",
+      Address:
+        "Takai - Khopoli at, Takai - Adoshi Road, Takai, Khopoli, Maharashtra 410203",
+      Phone: "02192 265 675",
+      Lat: 18.80349991336459,
+      Long: 73.29726921941086,
+    },
+
+    {
+      Name: "VSI",
+      Address: "151, 152, PALI ROAD, Umbare, Maharashtra",
+      Phone: "02192 265 675",
+      Lat: 18.839246054915783,
+      Long: 73.28559624655573,
+    },
+  ],
+
+  FUEL: [
+    {
+      Name: "Bharat Petroleum, Petrol Pump -Hemkunt Automobiles",
+      Address: "KALOTE (NH 4), RAIGAD, Maharashtra 410203",
+      Phone: "02192 265 675",
+      Lat: 18.857192690909617,
+      Long: 73.27564537509866,
+    },
+
+    {
+      Name: "Essar Petrol Pump(Suvarnareshma)",
+      Address: "Pen - Khopoli Rd, Tambati, Maharashtra 410203",
+      Phone: "02192 265 675",
+      Lat: 18.808264388034978,
+      Long: 73.26570176746961,
+    },
+  ],
+};
+
 function getMood() {
   return mood1;
 }
@@ -256,7 +371,7 @@ function hist() {
     }
   });
 }
-function servicesin() {
+function servicesin(clickme) {
   if (
     document.getElementById("servicesin").style.display == "" ||
     document.getElementById("servicesin").style.display == "none"
@@ -270,6 +385,7 @@ function servicesin() {
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
   }
+  services_in(clickme);
 }
 function add() {
   if (city != "") {
@@ -400,5 +516,64 @@ function markers(l, i, carnum, ph) {
     infowindow2.open(map, marker2);
   });
 
+  return marker2;
+}
+
+function services_in(service) {
+  document.getElementById("servicesin").innerHTML =
+    `<div class="services_upar">` +
+    service +
+    `</div>
+  <div class="services_in_in" id="services_in_in"> </div>`;
+
+  for (i = 0; i < services_list[service].length; i++) {
+    document.getElementById("services_in_in").innerHTML +=
+      `<div class='servicesin_cards'>
+        <div class='servicesin_img'>
+        <img src="static/pics/` +
+      service +
+      `.png" style="height:100%; width:auto; margin-top:2%">` +
+      `</div>
+        <div class='servicesin_text'>
+                <text style="font-weight: bold; font-size: 20px">` +
+      services_list[service][i]["Name"] +
+      `</text>
+                <br>
+                <text>` +
+      services_list[service][i]["Address"] +
+      `</text>
+                <br>
+                <text style="font-weight:bold;"> Ph: ` +
+      services_list[service][i]["Phone"] +
+      `
+                </text>
+        </div>
+        
+    </div>`;
+  }
+}
+function servicein_marker(url, l, i, name, add, ph) {
+  var marker2 = new google.maps.Marker({
+    position: { lat: l, lng: i },
+
+    icon: {
+      url: url, // url
+      scaledSize: new google.maps.Size(40, 40),
+    },
+    map: map,
+  });
+  var infowindow2 = new google.maps.InfoWindow({
+    content:
+      "<li>Name:" +
+      name +
+      "</li><li>Address:" +
+      add +
+      "</li><li>Phone:" +
+      ph +
+      "</li>",
+  });
+  google.maps.event.addListener(marker2, "click", function () {
+    infowindow2.open(map, marker2);
+  });
   return marker2;
 }

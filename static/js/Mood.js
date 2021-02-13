@@ -1,7 +1,7 @@
 function initMap() {
   var mapProp = {
     center: new google.maps.LatLng(22.591797597003268, 88.33830293795195),
-    zoom: 15,
+    zoom: 8,
   };
   map = new google.maps.Map(document.getElementById("map"), mapProp);
   (l = 18.829491), (i = 73.258131);
@@ -25,6 +25,7 @@ function initMap() {
 }
 var markers_buddies = [];
 var markers_servicesin = [];
+
 var map = "";
 var mood1 = "";
 var services_list = {
@@ -153,9 +154,8 @@ function play_song(mood) {
       mood: mood,
     },
     success: function (ans) {
-      console.log(ans);
       var anss = ans.split("^");
-      console.log(anss[1]);
+
       if (anss[2] == "True") anss[2] = "(Explicit)";
       else anss[2] = "";
       document.getElementById("song_name").innerHTML = anss[0] + anss[2];
@@ -168,11 +168,11 @@ function play_song(mood) {
   });
 }
 function music(mood) {
+  clearMap();
   if (
     document.getElementById("music").style.display == "" ||
     document.getElementById("music").style.display == "none"
   ) {
-    console.log(city);
     document.getElementById("music").style.display = "inline-block";
     document.getElementById("moods").style.display = "none";
     document.getElementById("services").style.display = "none";
@@ -188,6 +188,7 @@ function music(mood) {
   }
 }
 function services() {
+  clearMap();
   if (
     document.getElementById("services").style.display == "" ||
     document.getElementById("services").style.display == "none"
@@ -204,6 +205,7 @@ function services() {
 }
 
 function buddies() {
+  clearMap();
   if (
     document.getElementById("buddy").style.display == "" ||
     document.getElementById("buddy").style.display == "none"
@@ -221,6 +223,7 @@ function buddies() {
 }
 var flag_toggle = false;
 function buddies_toggle() {
+  clearMap();
   var checkbox = document.getElementById("checkbox");
   if (checkbox.checked == true) {
     var set_data = firebase
@@ -233,13 +236,13 @@ function buddies_toggle() {
     var data_buddies = firebase.database().ref("Buddies").child(city);
     data_buddies.on("value", (snap) => {
       dictionary = snap.val();
-      console.log(dictionary);
+
       document.getElementById("buddies").innerHTML = "";
       if (Object.keys(dictionary).length == 1) {
-        //  console.log(Object.keys(dictionary).length);
+        clearMap();
+
         document.getElementById("buddies").innerHTML = `No Buddies`;
       } else {
-        markers_buddies = [];
         for (i = 0; i < Object.keys(dictionary).length; i++) {
           if (
             getDistanceFromLatLonInKm(
@@ -250,14 +253,16 @@ function buddies_toggle() {
             ) < 60 &&
             Object.keys(dictionary)[i] != "WB012345"
           ) {
-            markers_buddies.push(
-              markers(
-                dictionary[Object.keys(dictionary)[i]]["lat"],
-                dictionary[Object.keys(dictionary)[i]]["long"],
-                Object.keys(dictionary)[i],
-                dictionary[Object.keys(dictionary)[i]]["phone"]
-              )
-            );
+            if (checkbox.checked == true) {
+              markers_buddies.push(
+                markers(
+                  dictionary[Object.keys(dictionary)[i]]["lat"],
+                  dictionary[Object.keys(dictionary)[i]]["long"],
+                  Object.keys(dictionary)[i],
+                  dictionary[Object.keys(dictionary)[i]]["phone"]
+                )
+              );
+            }
             document.getElementById("buddies").innerHTML +=
               `<div class='bud_cards'>
             <div class='bud_img'>
@@ -278,7 +283,6 @@ function buddies_toggle() {
       }
     });
   } else if (flag_toggle) {
-    console.log("nfknfknfknfknkf");
     firebase
       .database()
       .ref("Buddies")
@@ -288,13 +292,17 @@ function buddies_toggle() {
     document.getElementById(
       "buddies"
     ).innerHTML = `Make yourself visible in order to check out your buddies`;
+    clearMap();
   } else {
+    clearMap();
+
     document.getElementById(
       "buddies"
     ).innerHTML = `Make yourself visible in order to check out your buddies`;
   }
 }
 function souvenirs() {
+  clearMap();
   if (
     document.getElementById("souvenirs").style.display == "" ||
     document.getElementById("souvenirs").style.display == "none"
@@ -310,6 +318,7 @@ function souvenirs() {
   }
 }
 function hist() {
+  clearMap();
   if (
     document.getElementById("history").style.display == "" ||
     document.getElementById("history").style.display == "none"
@@ -324,26 +333,23 @@ function hist() {
     document.getElementById("servicesin").style.display = "none";
   }
   var data_history = firebase.database().ref("History").child("WB012345");
-  console.log(data_history);
+
   data_history.on("value", (snap) => {
     dictionary = snap.val();
-    console.log(dictionary);
+
     document.getElementById("history").innerHTML = "";
     if (Object.keys(dictionary).length == 1) {
       document.getElementById(
         "history"
       ).innerHTML = `<text class='hist_text' >Not found</text>`;
     } else {
-      console.log(Object.keys(dictionary).length);
       for (i = 0; i < Object.keys(dictionary).length; i++) {
         if (Object.keys(dictionary)[i] != "Place") {
-          console.log(Object.keys(dictionary)[i].length);
           for (
             j = 0;
             j < Object.keys(dictionary[Object.keys(dictionary)[i]]).length;
             j++
           ) {
-            console.log(i, j);
             document.getElementById("history").innerHTML +=
               `<div class='hist_cards'>
       <div class='hist_img'>
@@ -372,6 +378,7 @@ function hist() {
   });
 }
 function servicesin(clickme) {
+  clearMap();
   if (
     document.getElementById("servicesin").style.display == "" ||
     document.getElementById("servicesin").style.display == "none"
@@ -392,7 +399,6 @@ function add() {
     var sov = prompt("Enter the new souvenir");
 
     if (sov != null) {
-      console.log(sov);
       var database = firebase
         .database()
         .ref("Souvenir")
@@ -411,14 +417,12 @@ $.ajax({
   type: "POST",
   data: {},
   success: function (ans) {
-    console.log(ans);
     city = ans;
     firebase_();
   },
 });
 
 function firebase_() {
-  console.log(city);
   var firebaseConfig = {
     apiKey: "AIzaSyAnbgtlUoEZtzhCrw0UxIlm9-h8dnHpSuo",
     authDomain: "good-trip-4e816.firebaseapp.com",
@@ -449,7 +453,7 @@ function firebase_() {
       data_souvenir.on("value", (snap1) => {
         dictionary = snap1.val();
         souvenirs_list = Object.keys(dictionary);
-        console.log(souvenirs_list);
+
         flag = false;
         scrape();
       });
@@ -463,7 +467,7 @@ function scrape() {
     type: "POST",
     success: function (souv) {
       souvenirs_list1 = souvenirs_list.concat(souv["a"]);
-      console.log(souvenirs_list1);
+
       var k = document.getElementById("souvenirs");
       k.innerHTML = "";
       for (i = 0; i < souvenirs_list1.length; i++) {
@@ -525,8 +529,18 @@ function services_in(service) {
     service +
     `</div>
   <div class="services_in_in" id="services_in_in"> </div>`;
-
+  markers_servicesin = [];
   for (i = 0; i < services_list[service].length; i++) {
+    markers_servicesin.push(
+      servicein_marker(
+        "static/pics/" + service + ".png",
+        services_list[service][i]["Lat"],
+        services_list[service][i]["Long"],
+        services_list[service][i]["Name"],
+        services_list[service][i]["Address"],
+        services_list[service][i]["Phone"]
+      )
+    );
     document.getElementById("services_in_in").innerHTML +=
       `<div class='servicesin_cards'>
         <div class='servicesin_img'>
@@ -554,7 +568,7 @@ function services_in(service) {
 }
 function servicein_marker(url, l, i, name, add, ph) {
   var marker2 = new google.maps.Marker({
-    position: { lat: l, lng: i },
+    position: { lat: Number(l), lng: Number(i) },
 
     icon: {
       url: url, // url
@@ -576,4 +590,14 @@ function servicein_marker(url, l, i, name, add, ph) {
     infowindow2.open(map, marker2);
   });
   return marker2;
+}
+function clearMap() {
+  for (let i = 0; i < markers_buddies.length; i++) {
+    markers_buddies[i].setMap(null);
+  }
+  for (let i = 0; i < markers_servicesin.length; i++) {
+    markers_servicesin[i].setMap(null);
+  }
+  markers_servicesin = [];
+  markers_buddies = [];
 }

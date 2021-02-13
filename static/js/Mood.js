@@ -112,6 +112,41 @@ function hist() {
     document.getElementById("music").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
   }
+  var data_history = firebase.database().ref("History").child("WB012345");
+  console.log(data_history);
+  data_history.on("value", (snap) => {
+    dictionary = snap.val();
+    console.log(dictionary);
+    document.getElementById("history").innerHTML = "";
+    if (Object.keys(dictionary).length == 1) {
+      console.log(Object.keys(dictionary).length);
+      document.getElementById(
+        "history"
+      ).innerHTML = `<text class='hist_text' >Not found</text>`;
+    } else {
+      for (i = 0; i < Object.keys(dictionary).length; i++) {
+        document.getElementById("history").innerHTML +=
+          `<div class='hist_cards'>
+      <div class='hist_img'>
+      <img src="/static/pics/bud.png">
+      </div>
+      <div class='hist_text'>
+              <text>` +
+          Object.keys(dictionary)[i] +
+          `</text>
+              <br>
+              <text>` +
+          dictionary[Object.keys(dictionary)[i]]["Distance"] +
+          `</text>
+              <br>
+              <text>` +
+          dictionary[Object.keys(dictionary)[i]]["Time"] +
+          `</text>
+      </div>
+    </div>`;
+      }
+    }
+  });
 }
 function servicesin() {
   if (

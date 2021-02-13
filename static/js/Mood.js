@@ -1,6 +1,6 @@
 function initMap() {
   var mapProp = {
-    center: new google.maps.LatLng(22.591797597003268, 88.33830293795195),
+    center: new google.maps.LatLng(18.829491, 73.258131),
     zoom: 8,
   };
   map = new google.maps.Map(document.getElementById("map"), mapProp);
@@ -25,7 +25,7 @@ function initMap() {
 }
 var markers_buddies = [];
 var markers_servicesin = [];
-
+var marker = "";
 var map = "";
 var mood1 = "";
 var services_list = {
@@ -90,8 +90,8 @@ var services_list = {
       Name: "Puncture Man Sanpada",
       Address:
         "Hotel Highway View, Mumbai Pune Road, Sanpada, Navi Mumbai, Sector 24, Turbhe, Mumbai, Maharashtra 400705",
-      Long: 18.828687937186427,
-      Lat: 73.26276569903425,
+      Long: 73.26276569903425,
+      Lat: 18.828687937186427,
       Phone: "12345678",
     },
 
@@ -164,6 +164,11 @@ function play_song(mood) {
       document.getElementById("music_url").load();
       document.getElementById("music_url").play();
       document.getElementById("song_image").setAttribute("src", anss[4]);
+      document
+        .getElementById("music_url")
+        .addEventListener("ended", function () {
+          play_song(getMood());
+        });
     },
   });
 }
@@ -355,6 +360,12 @@ function hist() {
       <div class='hist_img'>
       <img src="/static/pics/bud.png">
       </div>
+      <img onClick='remove("` +
+              Object.keys(dictionary)[i] +
+              `","` +
+              Object.keys(dictionary[Object.keys(dictionary)[i]])[j] +
+              `")'  src="static/pics/cross.svg" style="height:30%; width:30%; margin-left:75%" id="btt">
+   
       <div class='hist_text'>
               <text>` +
               Object.keys(dictionary)[i] +
@@ -370,6 +381,7 @@ function hist() {
               ]["Distance"] +
               `</text>
       </div>
+
     </div>`;
           }
         }
@@ -600,4 +612,106 @@ function clearMap() {
   }
   markers_servicesin = [];
   markers_buddies = [];
+}
+async function dynamic() {
+  latt = 18.829491;
+  longg = 73.258131;
+  document.getElementById("servicesin").style.display = "block";
+  document.getElementById("services").style.display = "none";
+  document.getElementById("servicesin").innerHTML =
+    `<div class="services_upar">` +
+    "FUEL" +
+    `</div>
+<div class="services_in_in" id="services_in_in"> </div>`;
+  document.getElementById("services_in_in").innerHTML +=
+    `<div class='servicesin_cards'>
+    <div class='servicesin_img'>
+    <img src="static/pics/FUEL.png" style="height:100%; width:auto; margin-top:2%">` +
+    `</div>
+    <div class='servicesin_text'>
+            <text style="font-weight: bold; font-size: 20px">` +
+    services_list["FUEL"][0]["Name"] +
+    `</text>
+            <br>
+            <text>` +
+    services_list["FUEL"][0]["Address"] +
+    `</text>
+            <br>
+            <text style="font-weight:bold;"> Ph: ` +
+    services_list["FUEL"][0]["Phone"] +
+    `
+            </text>
+    </div>
+    
+</div>`;
+  markers_servicesin.push(
+    servicein_marker(
+      "static/pics/" + "FUEL" + ".png",
+      services_list["FUEL"][0]["Lat"],
+      services_list["FUEL"][0]["Long"],
+      services_list["FUEL"][0]["Name"],
+      services_list["FUEL"][0]["Address"],
+      services_list["FUEL"][0]["Phone"]
+    )
+  );
+  for (i = 0; i < 50; i++) {
+    await new Promise((done) => setTimeout(() => done(), 500));
+    if (i == 35) {
+      clearMap();
+      markers_servicesin.push(
+        servicein_marker(
+          "static/pics/" + "FUEL" + ".png",
+          services_list["FUEL"][1]["Lat"],
+          services_list["FUEL"][1]["Long"],
+          services_list["FUEL"][1]["Name"],
+          services_list["FUEL"][1]["Address"],
+          services_list["FUEL"][1]["Phone"]
+        )
+      );
+      document.getElementById("services_in_in").innerHTML =
+        `<div class='servicesin_cards'>
+        <div class='servicesin_img'>
+        <img src="static/pics/FUEL.png" style="height:100%; width:auto; margin-top:2%">` +
+        `</div>
+        <div class='servicesin_text'>
+                <text style="font-weight: bold; font-size: 20px">` +
+        services_list["FUEL"][1]["Name"] +
+        `</text>
+                <br>
+                <text>` +
+        services_list["FUEL"][1]["Address"] +
+        `</text>
+                <br>
+                <text style="font-weight:bold;"> Ph: ` +
+        services_list["FUEL"][1]["Phone"] +
+        `
+                </text>
+        </div>
+        
+    </div>`;
+    }
+
+    var fact = 0.00001 * i;
+    latt -= fact;
+    longg += fact;
+    marker.setMap(null);
+    marker = new google.maps.Marker({
+      position: { lat: latt, lng: longg },
+
+      icon: {
+        url: "static/pics/car.svg", // url
+        scaledSize: new google.maps.Size(40, 40),
+      },
+      map: map,
+    });
+  }
+}
+function remove(cityy, datee) {
+  firebase
+    .database()
+    .ref("History")
+    .child("WB012345")
+    .child(cityy)
+    .child(datee)
+    .set(null);
 }

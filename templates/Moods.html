@@ -75,7 +75,7 @@
 
             </div>
     
-            <button  class='next' onClick='play_song(getMood())'><img src="{{ url_for('static', filename='pics/next.png') }}"></button>
+            <button  class='next' onClick='play_song(getMood())' ><img src="{{ url_for('static', filename='pics/next.png') }}"></button>
             <button class='container' onClick='music()'> <a>MOODS</a></button>
             </div>
             <!-- MUSIC DIV -->
@@ -88,12 +88,12 @@
                     <a class='servicestext'> HOTELS</a>
                 </div>
                 <div class='cards'>
-                    <button class="mood1" onclick="servicesin('FUEL')"><img src="{{ url_for('static', filename='pics/FUEL.png') }}"></button>  
+                    <button class="mood1" onclick="dynamic()"><img src="{{ url_for('static', filename='pics/FUEL.png') }}"></button>  
                     <a class='servicestext'> FUEL</a>
                 </div>
                 <br><br><br>
                 <div class='cards'>
-                    <button class="mood1" onclick="servicesin('POLICE STATION')"><img src="{{ url_for('static', filename='pics/POLICE STATION.png') }}"></button>  
+                    <button class="mood1"  onclick="servicesin('POLICE STATION')"><img src="{{ url_for('static', filename='pics/POLICE STATION.png') }}"></button>  
                     <a class='servicestext'> POLICE</a>
                 </div>
                 <div class='cards'>

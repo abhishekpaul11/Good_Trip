@@ -31,8 +31,8 @@ s1 = 0
 genres = []
 city = ""
 cat_id = ''
-lat = '18.829491'  # current latitude
-lng = '73.258131'  # current longitide
+lat = '19.0760'  # current latitude
+lng = '72.8777'  # current longitide
 app = Flask(__name__, static_folder="./static")
 
 # In[ ]:
@@ -60,12 +60,12 @@ def dest_weather(city):
 @app.route('/', methods=['POST', 'GET'])
 def home():
     global city
-    print(request.form.get('dest'))
+
     if(request.form.get('dest') == "OOPS"):
         return render_template('Dashboard.html')
     elif(request.form.get('dest') != None and request.form.get('dest') != 'NA'):
         res = dest_weather(request.form.get('dest'))
-        print(res)
+
         city = request.form.get('dest')
         res = res.split('%')
         time.sleep(3)
@@ -81,7 +81,6 @@ def home():
 @app.route('/get_location', methods=['POST', "GET"])
 def get_location():
     global city
-    print(city)
     return city
 
 
@@ -94,10 +93,9 @@ def play_track(gen):
     song_type = (a['tracks'][0]['type'])
     name = (a['tracks'][0]['album']['artists'][0]['name'])
     img = (a['tracks'][0]['album']['images'][0]['url'])
-    print(url, type(url))
     if((url == None) or song_type != 'track'):
         return(play_track(gen))
-    print(song, name, url, explicit)
+
     return (song+'^'+url+'^'+str(explicit)+'^'+name+'^'+img)
 
 
@@ -127,7 +125,7 @@ def play_plist(cat_id, s11):
 def song():
 
     user = request.form['mood']
-    print(user)
+
     res = ''
     if(user == 'happy'):
         flag = 'track'
@@ -152,6 +150,7 @@ def song():
     elif (user == 'weather'):
         flag = 'track'
         wthr = weather(get_city(lat, lng))
+
         if(wthr == 'hot'):
             genres = ['summer', 'Acoustic']
         elif(wthr == 'cold'):
@@ -171,7 +170,7 @@ def song():
         global s1
         s1 += 1
         res = play_plist(cat_id, s1)
-    print(res)
+
     return res
 
 
@@ -238,6 +237,7 @@ def get_region(lat, lng):
         ','+lng+'&key=30afd099cb2243b0a2f2bc3ec78b7ae5&pretty=1'
     response = requests.get(url)
     x = response.json()
+
     return (x["results"][0]['components']['state'])
 
 
@@ -249,7 +249,7 @@ def souvenir():
         from googlesearch import search
     except ImportError:
         print("No module named 'google' found")
-    # to search
+
     query = "whatshot "+city + " best things to buy"
 
     for j in search(query, tld="co.in", num=10, stop=2, pause=2):

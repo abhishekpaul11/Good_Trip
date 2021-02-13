@@ -336,7 +336,7 @@
 }
 .hist_cards {
   width: 100%;
-  height: 15%;
+  height: 25%;
   margin-bottom: 5%;
   text-align: center;
   background: rgba(0, 0, 0, 0.38);
@@ -345,9 +345,9 @@
 .hist_img {
   position: absolute;
   width: 20%;
-  height: 15%;
+  height: 18%;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 .hist_text {
   position: absolute;

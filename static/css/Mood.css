@@ -124,7 +124,7 @@
   position: absolute;
   width: 20vh;
   height: 20vh;
-  background-color: blue;
+  border-style: none;
   margin-left: 19%;
 }
 .buttons {
@@ -372,14 +372,13 @@
   font-size: 20px;
   color: #ffffff;
   text-align: center;
-  margin-left: 1%;
-  background-color: turquoise;
+  margin-left: 7%;
 }
 .weather_img {
   position: absolute;
   height: 100%;
   width: auto;
-  margin-left: 90%;
+  margin-left: 15%;
   display: inline-block;
-  background-color: white;
+  align-items: center;
 }

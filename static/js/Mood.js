@@ -82,6 +82,48 @@ function buddies() {
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
   }
+
+  var data_buddies = firebase.database().ref("Buddies").child(city);
+  console.log(data_buddies);
+  data_buddies.on("value", (snap) => {
+    dictionary = snap.val();
+    console.log(dictionary);
+    document.getElementById("buddies").innerHTML = "";
+    if (dictionary == null || Object.keys(dictionary).length <= 1) {
+      //  console.log(Object.keys(dictionary).length);
+      document.getElementById(
+        "buddies"
+      ).innerHTML = `<text class='bud_text' >No Buddies</text>`;
+    } else {
+      for (i = 0; i < Object.keys(dictionary).length; i++) {
+        if (
+          Object.keys(dictionary)[i] != "carno" &&
+          getDistanceFromLatLonInKm(
+            18.829491,
+            73.258131,
+            dictionary[Object.keys(dictionary)[i]]["lat"],
+            dictionary[Object.keys(dictionary)[i]]["long"]
+          ) < 60
+        ) {
+          document.getElementById("buddies").innerHTML +=
+            `<div class='bud_cards'>
+          <div class='bud_img'>
+          <img src="/static/pics/bud.png">
+          </div>
+          <div class='bud_text'>
+              <a>` +
+            Object.keys(dictionary)[i] +
+            `</a><br>
+              <a>` +
+            dictionary[Object.keys(dictionary)[i]]["phone"] +
+            `</a>
+              <br><br>
+          </div>
+        </div>`;
+        }
+      }
+    }
+  });
 }
 function souvenirs() {
   if (
@@ -119,31 +161,43 @@ function hist() {
     console.log(dictionary);
     document.getElementById("history").innerHTML = "";
     if (Object.keys(dictionary).length == 1) {
-      console.log(Object.keys(dictionary).length);
       document.getElementById(
         "history"
       ).innerHTML = `<text class='hist_text' >Not found</text>`;
     } else {
+      console.log(Object.keys(dictionary).length);
       for (i = 0; i < Object.keys(dictionary).length; i++) {
-        document.getElementById("history").innerHTML +=
-          `<div class='hist_cards'>
+        if (Object.keys(dictionary)[i] != "Place") {
+          console.log(Object.keys(dictionary)[i].length);
+          for (
+            j = 0;
+            j < Object.keys(dictionary[Object.keys(dictionary)[i]]).length;
+            j++
+          ) {
+            console.log(i, j);
+            document.getElementById("history").innerHTML +=
+              `<div class='hist_cards'>
       <div class='hist_img'>
       <img src="/static/pics/bud.png">
       </div>
       <div class='hist_text'>
               <text>` +
-          Object.keys(dictionary)[i] +
-          `</text>
+              Object.keys(dictionary)[i] +
+              `</text>
               <br>
               <text>` +
-          dictionary[Object.keys(dictionary)[i]]["Distance"] +
-          `</text>
+              Object.keys(dictionary[Object.keys(dictionary)[i]])[j] +
+              `</text>
               <br>
               <text>` +
-          dictionary[Object.keys(dictionary)[i]]["Time"] +
-          `</text>
+              dictionary[Object.keys(dictionary)[i]][
+                Object.keys(dictionary[Object.keys(dictionary)[i]])[j]
+              ]["Distance"] +
+              `</text>
       </div>
     </div>`;
+          }
+        }
       }
     }
   });
@@ -256,4 +310,22 @@ function scrape() {
       souvenirs_list = [];
     },
   });
+}
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
 }

@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup, SoupStrainer
 import httplib2
 from googlesearch import search
 import os
-
+import time
 # In[ ]:
 
 
@@ -31,8 +31,8 @@ s1 = 0
 genres = []
 city = ""
 cat_id = ''
-lat = '30.9010'  # current latitude
-lng = '75.8573'  # current longitide
+lat = '18.829491'  # current latitude
+lng = '73.258131'  # current longitide
 app = Flask(__name__, static_folder="./static")
 
 # In[ ]:
@@ -68,6 +68,7 @@ def home():
         print(res)
         city = request.form.get('dest')
         res = res.split('%')
+        time.sleep(3)
         return render_template('Moods.html', ct=city, temp=res[0]+'°C', desc=res[1], icon='http://openweathermap.org/img/wn/'+res[2]+'@2x.png')
 
     elif(request.form.get('dest') == 'NA'):
@@ -275,6 +276,8 @@ def souvenir():
         return({'a': details1[0:5]})
     elif(len(details3) > 4):
         return({'a': details3[0:5]})
+    else:
+        return ({})
 
 
 app.run('0.0.0.0', 5005, debug=True)

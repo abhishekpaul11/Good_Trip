@@ -14,11 +14,9 @@
     <body>
         <div class="header">
             <img src="{{ url_for('static', filename='pics/car.svg') }}" class="car"></img>
-            <div class='weather'>
-                
-            <text class='weather_text'>{{ct}} <br>{{temp}} <br>{{desc}}</a>
-        
-            <img src="{{icon}}" class="weather_img"/>
+            <div class='weather'>   
+            <div  class='weather_text'><text>{{ct}} <br>{{temp}} <br>{{desc}}</a></div>
+           <div class="weather_img"> <img src="{{icon}}" style="height: 100%;width: auto;" /></div>
          </div>
       
           </div>
@@ -117,39 +115,7 @@
 
 
         <!-- BUDDIES DIV -->
-        <div class='buddies' id='buddies'>
-            <div class='bud_cards'>
-                <div class='bud_img'>
-                <img src="{{ url_for('static', filename='pics/bud.png') }}">
-                </div>
-                <div class='bud_text'>
-                    <a>WB0XXXXX</a>
-                    <a>+91XXXXXXXXXX</a>
-                    <br><br>
-                </div>
-            </div>
-            <div class='bud_cards'>
-                <div class='bud_img'>
-                <img src="{{ url_for('static', filename='pics/bud.png') }}">
-                </div>
-                <div class='bud_text'>
-                    <a>WB0XXXXX</a>
-                    <a>+91XXXXXXXXXX</a>
-                    <br><br>
-                </div>
-            </div>
-            <div class='bud_cards'>
-                <div class='bud_img'>
-                <img src="{{ url_for('static', filename='pics/bud.png') }}">
-                </div>
-                <div class='bud_text'>
-                    <a>WB0XXXXX</a>
-                    <a>+91XXXXXXXXXX</a>
-                    <br><br>
-                </div>
-            </div>
-        </div>
-        
+        <div class='buddies' id='buddies'></div>
         <!-- BUDDIES DIV -->
 
         <!-- SOUVENIRS -->
@@ -159,8 +125,7 @@
 
 
         <!-- HISTORY -->
-        <div class='history' id='history'>
-        </div>
+        <div class='history' id='history'></div>
         <!-- HISTORY -->
 
 

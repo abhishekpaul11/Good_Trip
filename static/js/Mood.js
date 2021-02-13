@@ -41,7 +41,7 @@ function music(mood) {
     document.getElementById("music").style.display = "inline-block";
     document.getElementById("moods").style.display = "none";
     document.getElementById("services").style.display = "none";
-    document.getElementById("buddies").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
     document.getElementById("plus").style.display = "none";
@@ -62,7 +62,7 @@ function services() {
     document.getElementById("services").style.display = "inline-block";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
-    document.getElementById("buddies").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
   }
@@ -70,12 +70,12 @@ function services() {
 
 function buddies() {
   if (
-    document.getElementById("buddies").style.display == "" ||
-    document.getElementById("buddies").style.display == "none"
+    document.getElementById("buddy").style.display == "" ||
+    document.getElementById("buddy").style.display == "none"
   ) {
     document.getElementById("plus").style.display = "none";
     document.getElementById("souvenirs").style.display = "none";
-    document.getElementById("buddies").style.display = "block";
+    document.getElementById("buddy").style.display = "block";
     document.getElementById("services").style.display = "none ";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
@@ -132,7 +132,7 @@ function souvenirs() {
   ) {
     document.getElementById("plus").style.display = "block";
     document.getElementById("souvenirs").style.display = "block";
-    document.getElementById("buddies").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
     document.getElementById("services").style.display = "none ";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
@@ -148,7 +148,7 @@ function hist() {
     document.getElementById("history").style.display = "block";
     document.getElementById("plus").style.display = "none";
     document.getElementById("souvenirs").style.display = "none";
-    document.getElementById("buddies").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
     document.getElementById("services").style.display = "none ";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
@@ -211,7 +211,7 @@ function servicesin() {
     document.getElementById("history").style.display = "none";
     document.getElementById("plus").style.display = "none";
     document.getElementById("souvenirs").style.display = "none";
-    document.getElementById("buddies").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
     document.getElementById("services").style.display = "none ";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";

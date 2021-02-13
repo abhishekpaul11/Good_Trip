@@ -3,8 +3,28 @@ function initMap() {
     center: new google.maps.LatLng(22.591797597003268, 88.33830293795195),
     zoom: 15,
   };
-  var map = new google.maps.Map(document.getElementById("map"), mapProp);
+  map = new google.maps.Map(document.getElementById("map"), mapProp);
+  (l = 18.829491), (i = 73.258131);
+  map.setCenter(new google.maps.LatLng(l, i));
+  marker = new google.maps.Marker({
+    position: { lat: l, lng: i },
+
+    icon: {
+      url: "static/pics/car.svg", // url
+      scaledSize: new google.maps.Size(40, 40),
+    },
+    map: map,
+  });
+
+  var infowindow = new google.maps.InfoWindow({
+    content: "My Location",
+  });
+  google.maps.event.addListener(marker, "click", function () {
+    infowindow.open(map, marker);
+  });
 }
+var markers_buddies = [];
+var map = "";
 var mood1 = "";
 function getMood() {
   return mood1;
@@ -82,48 +102,82 @@ function buddies() {
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
   }
-
-  var data_buddies = firebase.database().ref("Buddies").child(city);
-  console.log(data_buddies);
-  data_buddies.on("value", (snap) => {
-    dictionary = snap.val();
-    console.log(dictionary);
-    document.getElementById("buddies").innerHTML = "";
-    if (dictionary == null || Object.keys(dictionary).length <= 1) {
-      //  console.log(Object.keys(dictionary).length);
-      document.getElementById(
-        "buddies"
-      ).innerHTML = `<text class='bud_text' >No Buddies</text>`;
-    } else {
-      for (i = 0; i < Object.keys(dictionary).length; i++) {
-        if (
-          Object.keys(dictionary)[i] != "carno" &&
-          getDistanceFromLatLonInKm(
-            18.829491,
-            73.258131,
-            dictionary[Object.keys(dictionary)[i]]["lat"],
-            dictionary[Object.keys(dictionary)[i]]["long"]
-          ) < 60
-        ) {
-          document.getElementById("buddies").innerHTML +=
-            `<div class='bud_cards'>
-          <div class='bud_img'>
-          <img src="/static/pics/bud.png">
-          </div>
-          <div class='bud_text'>
-              <a>` +
-            Object.keys(dictionary)[i] +
-            `</a><br>
-              <a>` +
-            dictionary[Object.keys(dictionary)[i]]["phone"] +
-            `</a>
-              <br><br>
-          </div>
-        </div>`;
+  buddies_toggle();
+}
+var flag_toggle = false;
+function buddies_toggle() {
+  var checkbox = document.getElementById("checkbox");
+  if (checkbox.checked == true) {
+    var set_data = firebase
+      .database()
+      .ref("Buddies")
+      .child(city)
+      .child("WB012345")
+      .set({ lat: "22.23", long: "88.12", phone: "+91 9XXXXXX" });
+    flag_toggle = true;
+    var data_buddies = firebase.database().ref("Buddies").child(city);
+    data_buddies.on("value", (snap) => {
+      dictionary = snap.val();
+      console.log(dictionary);
+      document.getElementById("buddies").innerHTML = "";
+      if (Object.keys(dictionary).length == 1) {
+        //  console.log(Object.keys(dictionary).length);
+        document.getElementById("buddies").innerHTML = `No Buddies`;
+      } else {
+        markers_buddies = [];
+        for (i = 0; i < Object.keys(dictionary).length; i++) {
+          if (
+            getDistanceFromLatLonInKm(
+              18.829491,
+              73.258131,
+              dictionary[Object.keys(dictionary)[i]]["lat"],
+              dictionary[Object.keys(dictionary)[i]]["long"]
+            ) < 60 &&
+            Object.keys(dictionary)[i] != "WB012345"
+          ) {
+            markers_buddies.push(
+              markers(
+                dictionary[Object.keys(dictionary)[i]]["lat"],
+                dictionary[Object.keys(dictionary)[i]]["long"],
+                Object.keys(dictionary)[i],
+                dictionary[Object.keys(dictionary)[i]]["phone"]
+              )
+            );
+            document.getElementById("buddies").innerHTML +=
+              `<div class='bud_cards'>
+            <div class='bud_img'>
+            <img src="/static/pics/bud.png">
+            </div>
+            <div class='bud_text'>
+                <a>` +
+              Object.keys(dictionary)[i] +
+              `</a><br>
+                <a>` +
+              dictionary[Object.keys(dictionary)[i]]["phone"] +
+              `</a>
+                <br><br>
+            </div>
+          </div>`;
+          }
         }
       }
-    }
-  });
+    });
+  } else if (flag_toggle) {
+    console.log("nfknfknfknfknkf");
+    firebase
+      .database()
+      .ref("Buddies")
+      .child(String(city))
+      .child("WB012345")
+      .set(null);
+    document.getElementById(
+      "buddies"
+    ).innerHTML = `Make yourself visible in order to check out your buddies`;
+  } else {
+    document.getElementById(
+      "buddies"
+    ).innerHTML = `Make yourself visible in order to check out your buddies`;
+  }
 }
 function souvenirs() {
   if (
@@ -328,4 +382,23 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
   return deg * (Math.PI / 180);
+}
+function markers(l, i, carnum, ph) {
+  var marker2 = new google.maps.Marker({
+    position: { lat: l, lng: i },
+
+    icon: {
+      url: "static/pics/bud.png", // url
+      scaledSize: new google.maps.Size(40, 40),
+    },
+    map: map,
+  });
+  var infowindow2 = new google.maps.InfoWindow({
+    content: "<li>Car Number:" + carnum + "</li><li>Phone:" + ph + "</li>",
+  });
+  google.maps.event.addListener(marker2, "click", function () {
+    infowindow2.open(map, marker2);
+  });
+
+  return marker2;
 }

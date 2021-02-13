@@ -1,5 +1,6 @@
 * {
   outline: none;
+  font-family: "Infer", sans-serif;
 }
 .header {
   position: absolute;
@@ -220,6 +221,8 @@
     rgba(196, 196, 196, 0.8) 103.08%
   );
   backdrop-filter: blur(10px);
+  font-style: bold;
+  text-align: center;
 }
 .bud_cards {
   width: 100%;
@@ -247,7 +250,7 @@
   width: 60%;
   height: 10%;
   padding-top: 5%;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
 
   color: white;
@@ -351,7 +354,7 @@
   font-family: "Inter", sans-serif;
   width: 70%;
   height: 15%;
-  font-size: 25px;
+  font-size: 20px;
   margin-left: 25%;
 
   color: white;
@@ -393,21 +396,20 @@
   margin-left: 75%;
   display: inline-block;
   width: 25%;
-
   height: 100%;
 }
 .weather_text {
   position: absolute;
   height: 100%;
   width: auto;
-  font-size: 15px;
+  font-size: 20px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+
   color: #ffffff;
   text-align: center;
-  margin-left: 7%;
+  margin-left: 3%;
 }
 .weather_img {
   position: absolute;
@@ -420,7 +422,7 @@
 
 .switch {
   position: absolute;
-  width: 15%;
+  width: 18%;
   height: 5%;
 }
 

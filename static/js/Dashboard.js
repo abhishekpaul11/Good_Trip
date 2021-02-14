@@ -1,13 +1,6 @@
 function data(flag) {
   var firebaseConfig = {
-    apiKey: "AIzaSyAnbgtlUoEZtzhCrw0UxIlm9-h8dnHpSuo",
-    authDomain: "good-trip-4e816.firebaseapp.com",
-    databaseURL: "https://good-trip-4e816-default-rtdb.firebaseio.com/",
-    projectId: "good-trip-4e816",
-    storageBucket: "good-trip-4e816.appspot.com",
-    messagingSenderId: "582498217447",
-    appId: "1:582498217447:web:8df98a4346cad42107a142",
-    measurementId: "G-RRRGR9FBN4",
+    //add credentials
   };
   firebase.initializeApp(firebaseConfig);
   var d = new Date();

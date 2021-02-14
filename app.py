@@ -262,12 +262,12 @@ def souvenir():
     details = []
     details1 = []
     details3 = []
-    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('h2')):
+    for link in BeautifulSoup(response, 'html.parser', parse_only=SoupStrainer('h2')):
         details.append(link.text)
-    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('h3')):
+    for link in BeautifulSoup(response, 'html.parser', parse_only=SoupStrainer('h3')):
         details1.append(link.text)
 
-    for link in BeautifulSoup(response, 'html.parser', parseOnlyThese=SoupStrainer('b')):
+    for link in BeautifulSoup(response, 'html.parser', parse_only=SoupStrainer('b')):
         details3.append(link.text)
 
     if(len(details) > 4 and 'Similar Stories' not in details[0]):

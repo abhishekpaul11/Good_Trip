@@ -31,7 +31,6 @@ function data(flag) {
   var full_date = date + "-" + months[month] + "-" + year;
 
   var destination = document.getElementById("dest").value;
-  console.log(destination);
   if (flag == 0) {
     document.getElementById("dest").setAttribute("value", "NA");
   } else if (destination == "" || destination == null) {

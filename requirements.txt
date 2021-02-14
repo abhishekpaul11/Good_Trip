@@ -6,5 +6,5 @@ flask==0.12.4
 requests
 beautifulsoup4
 googlesearch-python
-httplibs2
 gunicorn
+httplib2

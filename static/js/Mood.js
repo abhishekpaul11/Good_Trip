@@ -186,6 +186,7 @@ function music(mood) {
     document.getElementById("servicesin").style.display = "none";
     document.getElementById("plus").style.display = "none";
     document.getElementById("souvenirs").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
     if (mood != "NA") play_song(mood);
   } else {
     document.getElementById("music").style.display = "none";
@@ -206,6 +207,7 @@ function services() {
     document.getElementById("buddy").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
   }
 }
 
@@ -223,8 +225,27 @@ function buddies() {
     document.getElementById("music").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
   }
   buddies_toggle();
+}
+function schedule() {
+  clearMap();
+  if (
+    document.getElementById("schedule").style.display == "" ||
+    document.getElementById("schedule").style.display == "none"
+  ) {
+    document.getElementById("schedule").style.display = "block";
+    document.getElementById("plus").style.display = "none";
+    document.getElementById("souvenirs").style.display = "none";
+    document.getElementById("buddy").style.display = "none";
+    document.getElementById("services").style.display = "none ";
+    document.getElementById("moods").style.display = "none";
+    document.getElementById("music").style.display = "none";
+    document.getElementById("history").style.display = "none";
+    document.getElementById("servicesin").style.display = "none";
+  }
+  schedule_toggle();
 }
 var flag_toggle = false;
 function buddies_toggle() {
@@ -306,6 +327,186 @@ function buddies_toggle() {
     ).innerHTML = `Make yourself visible in order to check out your buddies`;
   }
 }
+var flag_toggle1 = false;
+var source = "";
+var destination = "";
+function schedule_toggle() {
+  clearMap();
+  var info1;
+  var checkbox = document.getElementById("checkbox1");
+  if (checkbox.checked == true) {
+    info1 = prompt(
+      "Enter the source and destination seperated by a '-'.\nFor example: Mumbai-Goa."
+    );
+    info1 = info1.split("-");
+    source = info1[0];
+    destination = info1[1];
+    document.getElementById("add_schedule").style.display = "block";
+    flag_toggle1 = true;
+    var set_data = firebase
+      .database()
+      .ref("Schedule")
+      .child(info1[0])
+      .child(info1[1])
+      .child("Dates");
+    set_data.on("value", (snap) => {
+      dict = snap.val();
+      console.log(dict);
+      document.getElementById("scheduling").innerHTML = "";
+      if (Object.keys(dict).length <= 1) {
+        clearMap();
+
+        document.getElementById("scheduling").innerHTML = `No Scheduled Trips `;
+      } else {
+        document.getElementById("scheduling").innerHTML =
+          `<b> No. of Scheduled Trips <br> ` +
+          info1[0] +
+          `-` +
+          info1[1] +
+          `</b>`;
+        for (i = 0; i < Object.keys(dict).length; i++) {
+          if (Object.keys(dict)[i] != "Dummy") {
+            document.getElementById("scheduling").innerHTML +=
+              `<div class='bud_cards'>
+            <div class='bud_img'>
+            <img src="/static/pics/schedule.svg">
+            </div>
+            <div class='bud_text'>
+                <a>` +
+              Object.keys(dict)[i] +
+              `</a><br>
+                <a>` +
+              dict[Object.keys(dict)[i]] +
+              `</a>
+                <br>
+                <button onclick='schedule_trip("` +
+              Object.keys(dict)[i] +
+              `","` +
+              dict[Object.keys(dict)[i]] +
+              `","` +
+              info1[0] +
+              `","` +
+              info1[1] +
+              `")'>
+                <b> 
+              SCHEDULE</b> 
+              </button>
+                
+                <br>
+            </div>
+          </div>`;
+          }
+        }
+      }
+    });
+    var set_data1 = firebase
+      .database()
+      .ref("Schedule")
+      .child(info1[0])
+      .child(info1[1]);
+    set_data1.on("value", (snap) => {
+      dict2 = snap.val();
+      var match_rate = parseFloat(
+        (dict2["Success"] / (dict2["Success"] + dict2["Failure"])) * 100
+      ).toFixed(2);
+      if (match_rate >= 0)
+        document.getElementById("scheduling1").innerHTML =
+          `<b>Meetup Probablity: ` + match_rate + `%</b>`;
+      else
+        document.getElementById(
+          "scheduling1"
+        ).innerHTML = `<b>Meetup Probablity:NA</b>`;
+    });
+  } else {
+    clearMap();
+    document.getElementById("add_schedule").style.display = "none";
+    document.getElementById(
+      "scheduling"
+    ).innerHTML = `<b> Your Scheduled Trips</b>`;
+    var show_data = firebase
+      .database()
+      .ref("Schedule")
+      .child("Cars")
+      .child("WB012345");
+    show_data.on("value", (snap) => {
+      dict1 = snap.val();
+      if (Object.keys(dict1).length == 1) {
+        clearMap();
+
+        document.getElementById("scheduling").innerHTML = `No Scheduled Trips `;
+      } else {
+        for (i = 0; i < Object.keys(dict1).length; i++) {
+          if (Object.keys(dict1)[i] != "Dummy") {
+            document.getElementById("scheduling").innerHTML +=
+              `<div class='bud_cards'>
+        <div class='bud_img'>
+        <img src="/static/pics/schedule.svg">
+        </div>
+        <div class='bud_text'>
+            <a>` +
+              Object.keys(dict1)[i] +
+              `</a><br>
+            <a>` +
+              dict1[Object.keys(dict1)[i]] +
+              `</a>
+            <br>
+            <br>
+        </div>
+      </div>`;
+          }
+        }
+      }
+    });
+  }
+}
+function schedule_trip(date_trip, count_trip, source, destination) {
+  var set_data_trips = firebase
+    .database()
+    .ref("Schedule")
+    .child("Cars")
+    .child("WB012345")
+    .child(date_trip)
+    .set(source + "-" + destination);
+  var set_data_trips1 = firebase
+    .database()
+    .ref("Schedule")
+    .child(source)
+    .child(destination)
+    .child("Dates")
+    .child(date_trip)
+    .set(parseInt(count_trip) + 1);
+
+  document.getElementById("checkbox1").checked = false;
+  schedule_toggle();
+}
+function self_scheduler() {
+  var date_journey = prompt(
+    "Enter the date of journey in the format DD Month YYYY"
+  );
+  var set_data_trips1 = firebase
+    .database()
+    .ref("Schedule")
+    .child(source)
+    .child(destination)
+    .child("Dates")
+    .child("Dummy")
+    .set("");
+  var set_data_trips1 = firebase
+    .database()
+    .ref("Schedule")
+    .child(source)
+    .child(destination)
+    .child("Success")
+    .set("");
+  var set_data_trips1 = firebase
+    .database()
+    .ref("Schedule")
+    .child(source)
+    .child(destination)
+    .child("Failure")
+    .set("");
+  schedule_trip(date_journey, 0, source, destination);
+}
 function souvenirs() {
   clearMap();
   if (
@@ -320,6 +521,7 @@ function souvenirs() {
     document.getElementById("music").style.display = "none";
     document.getElementById("history").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
   }
 }
 function hist() {
@@ -336,6 +538,7 @@ function hist() {
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
     document.getElementById("servicesin").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
   }
   var data_history = firebase.database().ref("History").child("WB012345");
 
@@ -403,6 +606,7 @@ function servicesin(clickme) {
     document.getElementById("services").style.display = "none ";
     document.getElementById("moods").style.display = "none";
     document.getElementById("music").style.display = "none";
+    document.getElementById("schedule").style.display = "none";
   }
   services_in(clickme);
 }
@@ -436,7 +640,14 @@ $.ajax({
 
 function firebase_() {
   var firebaseConfig = {
-    //add credentials
+    apiKey: "AIzaSyAnbgtlUoEZtzhCrw0UxIlm9-h8dnHpSuo",
+    authDomain: "good-trip-4e816.firebaseapp.com",
+    databaseURL: "https://good-trip-4e816-default-rtdb.firebaseio.com/",
+    projectId: "good-trip-4e816",
+    storageBucket: "good-trip-4e816.appspot.com",
+    messagingSenderId: "582498217447",
+    appId: "1:582498217447:web:8df98a4346cad42107a142",
+    measurementId: "G-RRRGR9FBN4",
   };
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database().ref("Souvenir");

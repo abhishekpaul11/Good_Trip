@@ -27,9 +27,10 @@
             <button class='navbutton' onclick="buddies()"><text class='navtext'>BUDDIES</text></button>
             <button class='navbutton' onclick="souvenirs()"><text class='navtext'>SOUVENIRS</text></button>
             <button class='navbutton' onclick="hist()"><text class='navtext'>HISTORY</text></button>
+            <button class='navbutton' onclick="schedule()"><text class='navtext'>SCHEDULE</text></button>
         </div>
         <div class='map' id='map'>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<ADD API KEY>&callback=initMap"></script>    
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjqw8bOGGz9Ojfei_gOoYtxO5FKFo0gr0&callback=initMap"></script>    
         </div>
         <div class='moods' id='moods'>
             <div class='cards'>
@@ -146,5 +147,30 @@
            
         </div>
         <!-- SERVICES IN -->
+
+
+        <!-- <SCHEDULING> -->
+            <div class="schedule" id="schedule">
+                <div class='toggle' id='toggle1'>
+                    <label class="switch">
+                        <input type="checkbox" id="checkbox1" onclick="schedule_toggle()">
+                        <span class="slider round"></span>
+                       
+                      </label>
+                      <text style="font-weight: bold;margin-left: 30%;font-family: Infer, sans-serif;font-size: 20px;">Schedule a Trip<br></text>
+
+                </div>
+                <br>
+                <div id='add_schedule'>
+                <div id='scheduling1'> </div>
+                <button onclick="self_scheduler()" ><b>Self Schedule</b></button>
+                </div>
+            <div class='scheduling' id='scheduling'>
+            </div>
+  
+            </div>
+
+
+        <!-- </SCHEDULING> -->
     </body>
 </html>

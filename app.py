@@ -16,8 +16,8 @@ import time
 # In[ ]:
 
 
-SPOTIPY_CLIENT_ID = ''
-SPOTIPY_CLIENT_SECRET = ''
+SPOTIPY_CLIENT_ID = 'd0fb3f6135d14097bde522d8fa597197'
+SPOTIPY_CLIENT_SECRET = '465c0a4970d545a9a1d29f59209c40d0'
 auth_manager = SpotifyClientCredentials(
     SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=auth_manager)
@@ -39,7 +39,7 @@ app = Flask(__name__, static_folder="./static")
 
 
 def dest_weather(city):
-    api_key = ""
+    api_key = "a9170a3ab84748cc681f9fe929b19808"
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     city_name = city
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name
@@ -191,7 +191,7 @@ def next():
 
 
 def weather(city):
-    api_key = ""
+    api_key = "a9170a3ab84748cc681f9fe929b19808"
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     city_name = city
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name
@@ -221,7 +221,7 @@ def get_city(lat, lng):
     lat = str(lat)
     lng = str(lng)
     url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat + \
-        ','+lng+'&key=<ADD KEY>'
+        ','+lng+'&key=30afd099cb2243b0a2f2bc3ec78b7ae5&pretty=1'
     response = requests.get(url)
     x = response.json()
     return (x["results"][0]['components']['city'])
@@ -234,7 +234,7 @@ def get_region(lat, lng):
     lat = str(lat)
     lng = str(lng)
     url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat + \
-        ','+lng+'&key=<ADD KEY>'
+        ','+lng+'&key=30afd099cb2243b0a2f2bc3ec78b7ae5&pretty=1'
     response = requests.get(url)
     x = response.json()
 
